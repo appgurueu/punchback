@@ -17,7 +17,7 @@ minetest.register_on_punchplayer(function(player, hitter, time_from_last_punch, 
                 for _,z in pairs({-0.5*d,0,0.5*d}) do
                     local v=vector.add(vector.add(pos,{x=x,y=y,z=z}),mult)
                     local floor={x=math.floor(v.x*factor+0.5)/factor,y=math.floor(v.y*factor+0.5)/factor,z=math.floor(v.z*factor+0.5)/factor}
-                    if not (minetest.get_node(floor).walkable==true) then --Stop moving when colliding with solid node
+                    if minetest.get_node(floor).walkable then --Stop moving when colliding with solid node
                         goto overjump
                     end
                 end
