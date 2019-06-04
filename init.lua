@@ -7,6 +7,7 @@ PLAYER_SIZE=0.6 --Player collisionbox simulation size in percent, eg 0.6 means 6
 local factor=1000
 
 minetest.register_on_punchplayer(function(player, hitter, time_from_last_punch, tool_capabilities, dir, damage)
+    if not hitter:is_player() then return end
     local orig=vector.multiply(hitter:get_look_dir(),(pcall(tool_capabilities.punchback) or DEFAULT_PUNCHBACK) * math.min(PUNCHBACK_RELOAD*time_from_last_punch,PUNCHBACK_MAX)) --Calc punchback vector * strength
     local mult=vector.divide(vector.normalize(orig),PUNCHBACK_STEPS) --Divide by steps
     local pos=player:get_pos() --Player pos
